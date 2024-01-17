@@ -1,6 +1,6 @@
 // import { ChangeEvent, useState } from 'react';
 import { Card, Image } from 'semantic-ui-react';
-import { Repository } from '../../@Types/Repository';
+import { Repository } from '../../@Types/types';
 
 import './ReposResults.scss';
 

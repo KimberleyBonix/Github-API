@@ -1,12 +1,10 @@
-import { FormEvent, useState } from 'react';
+import { Dispatch, FormEvent, SetStateAction, useState } from 'react';
 import { Input, Select } from 'semantic-ui-react';
+import { QueryParams } from '../../@Types/types';
 
 type SearchBarProps = {
-  onSearchSumbit: (value: object) => void;
-  defaultValue: {
-    q: string;
-    per_page: number;
-  };
+  onSearchSumbit: Dispatch<SetStateAction<QueryParams>>;
+  defaultValue: QueryParams;
 };
 
 function SearchBar({ onSearchSumbit, defaultValue }: SearchBarProps) {
