@@ -41,6 +41,14 @@ function App() {
       .then((response) => {
         setRepoData(response.data.items);
         setTotalResult(response.data.total_count);
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          alert(error.response.data.message);
+        } else {
+          console.log('Error', error.message);
+        }
       });
   }, [searchParams, currentPage]);
 
