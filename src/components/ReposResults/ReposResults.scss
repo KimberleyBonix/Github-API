@@ -1,0 +1,7 @@
+@use '../../styles/variables' as v;
+
+.repositories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}

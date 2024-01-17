@@ -5,7 +5,7 @@ type MessageProps = {
 function Message({ result }: MessageProps) {
   return (
     <div>
-      <p>La recherche a donné {result} résultats</p>
+      <p>{result} results matched your search.</p>
     </div>
   );
 }

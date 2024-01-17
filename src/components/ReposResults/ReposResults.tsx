@@ -2,13 +2,15 @@
 import { Card, Image } from 'semantic-ui-react';
 import { Repository } from '../../@Types/Repository';
 
+import './ReposResults.scss';
+
 type ReposResultsProps = {
   repositories: Repository[];
 };
 
 function ReposResults({ repositories }: ReposResultsProps) {
   return (
-    <>
+    <section className="repositories">
       {repositories.map((repo) => (
         <Card key={repo.id}>
           <Image src="../../../public/logo512.png" wrapped ui={false} />
@@ -21,7 +23,7 @@ function ReposResults({ repositories }: ReposResultsProps) {
           </Card.Content>
         </Card>
       ))}
-    </>
+    </section>
   );
 }
 
