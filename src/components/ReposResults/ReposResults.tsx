@@ -1,5 +1,4 @@
-// import { ChangeEvent, useState } from 'react';
-import { Card, Image } from 'semantic-ui-react';
+import { Card, CardContent, Icon, Image } from 'semantic-ui-react';
 import { Repository } from '../../@Types/types';
 
 import './ReposResults.scss';
@@ -12,15 +11,18 @@ function ReposResults({ repositories }: ReposResultsProps) {
   return (
     <section className="repositories">
       {repositories.map((repo) => (
-        <Card key={repo.id}>
-          <Image src="../../../public/logo512.png" wrapped ui={false} />
+        <Card key={repo.id} href={repo.html_url}>
+          <Image src={repo.owner.avatar_url} wrapped ui={false} />
           <Card.Content>
             <Card.Header>{repo.name}</Card.Header>
-            <Card.Meta>
-              <span className="date">Joined in 2015</span>
-            </Card.Meta>
+            <a href={repo.owner.html_url}>{repo.owner.login}</a>
             <Card.Description>{repo.description}</Card.Description>
           </Card.Content>
+
+          <CardContent extra>
+            <Icon name="eye" />
+            {repo.watchers}
+          </CardContent>
         </Card>
       ))}
     </section>

@@ -1,13 +1,18 @@
+/* eslint-disable react/jsx-one-expression-per-line */
+import { Message } from 'semantic-ui-react';
+
 type MessageProps = {
   result: number;
 };
 
-function Message({ result }: MessageProps) {
+function ResultMessage({ result }: MessageProps) {
   return (
-    <div>
-      <p>{result} results matched your search.</p>
-    </div>
+    <Message>
+      <p>
+        <b>{result}</b> results matched your search.
+      </p>
+    </Message>
   );
 }
 
-export default Message;
+export default ResultMessage;

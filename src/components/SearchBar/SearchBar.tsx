@@ -1,6 +1,16 @@
 import { Dispatch, FormEvent, SetStateAction, useState } from 'react';
-import { Input, Select } from 'semantic-ui-react';
+import {
+  Button,
+  Form,
+  FormGroup,
+  FormInput,
+  FormSelect,
+  Input,
+  Select,
+} from 'semantic-ui-react';
 import { QueryParams } from '../../@Types/types';
+
+import './SearchBar.scss';
 
 type SearchBarProps = {
   onSearchSumbit: Dispatch<SetStateAction<QueryParams>>;
@@ -41,29 +51,41 @@ function SearchBar({ onSearchSumbit, defaultValue }: SearchBarProps) {
   }
 
   return (
-    <div>
-      <form method="post" onSubmit={handleSearchBar}>
-        <Input name="q" placeholder="Search..." defaultValue={defaultValue.q} />
-        <Select
+    <Form method="post" onSubmit={handleSearchBar} className="form">
+      <FormGroup>
+        <FormInput
+          className="query-input"
+          label="Search a repository name"
+          name="q"
+          placeholder="Search..."
+          defaultValue={defaultValue.q}
+        />
+        <FormSelect
+          className="select-input"
+          label="Sort by"
           name="sort"
           placeholder="Sort by"
           options={sortOptions}
           onChange={handleSortValue}
         />
-        <Select
+        <FormSelect
+          className="select-input"
+          label="Order"
           name="order"
-          placeholder="Order by"
+          placeholder="Order"
           options={orderOptions}
           onChange={handleOrderValue}
         />
-        <Input
+        <FormInput
+          className="perpage"
+          label="Result by page"
           name="per_page"
           type="number"
           defaultValue={defaultValue.per_page}
         />
-        <button type="submit">Rechercher</button>
-      </form>
-    </div>
+        <Button type="submit">Rechercher</Button>
+      </FormGroup>
+    </Form>
   );
 }
 export default SearchBar;

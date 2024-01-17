@@ -1,6 +1,13 @@
 @use '../../styles/variables' as v;
 
 main {
-  margin: 5rem auto;
-  max-width: 70rem;
+  margin: 0 auto;
+  padding: 3rem 1.8rem;
+  max-width: 68rem;
+}
+
+.pagination {
+  margin: 3rem auto;
+  display: flex;
+  justify-content: center;
 }

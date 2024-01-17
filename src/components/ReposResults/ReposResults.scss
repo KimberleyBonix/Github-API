@@ -1,7 +1,13 @@
 @use '../../styles/variables' as v;
 
 .repositories {
+  margin: 3rem 0;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 1rem;
+}
+
+.ui.card {
+  margin: 0 !important;
 }

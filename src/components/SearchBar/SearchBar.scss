@@ -1,0 +1,23 @@
+.form {
+  margin: 3rem 0;
+}
+
+button.ui.button {
+  align-self: flex-end;
+}
+
+.query-input {
+  width: 100%;
+}
+
+.select-input {
+  width: 250px;
+}
+
+.ui.selection.dropdown {
+  min-width: unset !important;
+}
+
+.perpage {
+  width: 120px;
+}

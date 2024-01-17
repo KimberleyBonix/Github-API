@@ -4,7 +4,7 @@ import { useState, useEffect, MouseEvent } from 'react';
 
 // Package imports
 import axios from 'axios';
-import { Pagination } from 'semantic-ui-react';
+import { Icon, Pagination } from 'semantic-ui-react';
 
 // Types
 import { Repository, QueryParams } from '../../@Types/types';
@@ -12,11 +12,11 @@ import { Repository, QueryParams } from '../../@Types/types';
 // Component import
 import SearchBar from '../SearchBar/SearchBar';
 import ReposResults from '../ReposResults/ReposResults';
-import Message from '../Message/Message';
+import ResultMessage from '../Message/Message';
 
 // SCSS
-import './App.scss';
 import 'semantic-ui-css/semantic.min.css';
+import './App.scss';
 
 function App() {
   const [repoData, setRepoData] = useState<Repository[]>([]);
@@ -24,7 +24,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const [searchParams, setSearchParams] = useState<QueryParams>({
-    q: 'javascript',
+    q: 'Javascript',
     sort: '',
     order: '',
     per_page: 6,
@@ -55,15 +55,21 @@ function App() {
 
   return (
     <main>
-      <h1>Browse through repositories</h1>
+      <h1>
+        <Icon name="github" />
+        Browse Github repositories
+      </h1>
       <SearchBar defaultValue={searchParams} onSearchSumbit={setSearchParams} />
-      <Message result={totalResult} />
+      <ResultMessage result={totalResult} />
       <ReposResults repositories={repoData} />
-      <Pagination
-        defaultActivePage={currentPage}
-        totalPages={totalPages}
-        onPageChange={handlePaginationChange}
-      />
+
+      <div className="pagination">
+        <Pagination
+          defaultActivePage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePaginationChange}
+        />
+      </div>
     </main>
   );
 }
