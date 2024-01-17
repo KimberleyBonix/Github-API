@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/comma-dangle */
 /* eslint-disable react/jsx-no-bind */
 // React import
-import { useState, useEffect, MouseEvent } from 'react';
+import { useState, useEffect, SyntheticEvent } from 'react';
 
 // Package imports
 import axios from 'axios';
-import { Icon, Pagination } from 'semantic-ui-react';
+import { Icon, Pagination, PaginationProps } from 'semantic-ui-react';
 
 // Types
 import { Repository, QueryParams } from '../../@Types/types';
@@ -21,7 +22,9 @@ import './App.scss';
 function App() {
   const [repoData, setRepoData] = useState<Repository[]>([]);
   const [totalResult, setTotalResult] = useState<number>(0);
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState<string | number | undefined>(
+    1
+  );
 
   const [searchParams, setSearchParams] = useState<QueryParams>({
     q: 'Javascript',
@@ -52,11 +55,11 @@ function App() {
       });
   }, [searchParams, currentPage]);
 
-  const totalPages = Math.ceil(totalResult / searchParams.per_page);
+  const totalPages = Math.ceil(totalResult / Number(searchParams.per_page));
 
   function handlePaginationChange(
-    event: MouseEvent,
-    { activePage }: { activePage: number }
+    event: SyntheticEvent,
+    { activePage }: PaginationProps
   ) {
     setCurrentPage(activePage);
   }

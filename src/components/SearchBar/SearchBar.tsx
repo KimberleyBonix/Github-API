@@ -1,12 +1,19 @@
-import { Dispatch, FormEvent, SetStateAction, useState } from 'react';
+/* eslint-disable no-return-assign */
+/* eslint-disable react/jsx-no-bind */
+import {
+  Dispatch,
+  FormEvent,
+  SetStateAction,
+  SyntheticEvent,
+  useState,
+} from 'react';
 import {
   Button,
+  DropdownProps,
   Form,
   FormGroup,
   FormInput,
   FormSelect,
-  Input,
-  Select,
 } from 'semantic-ui-react';
 import { QueryParams } from '../../@Types/types';
 
@@ -16,10 +23,9 @@ type SearchBarProps = {
   onSearchSumbit: Dispatch<SetStateAction<QueryParams>>;
   defaultValue: QueryParams;
 };
-
 function SearchBar({ onSearchSumbit, defaultValue }: SearchBarProps) {
-  const [sortValue, setSortValue] = useState('');
-  const [orderValue, setOrderValue] = useState('');
+  const [sortValue, setSortValue] = useState<any>('');
+  const [orderValue, setOrderValue] = useState<any>('');
 
   const orderOptions = [
     { key: 'asc', value: 'asc', text: 'Ascendant' },
@@ -33,19 +39,26 @@ function SearchBar({ onSearchSumbit, defaultValue }: SearchBarProps) {
     { key: 'updated', value: 'updated', text: 'Updated' },
   ];
 
-  const handleSortValue = (event, { value }) => setSortValue(value);
-  const handleOrderValue = (event, { value }) => setOrderValue(value);
+  function handleSortValue(event: SyntheticEvent, { value }: DropdownProps) {
+    setSortValue(value);
+  }
+
+  function handleOrderValue(event: SyntheticEvent, { value }: DropdownProps) {
+    setOrderValue(value);
+  }
 
   function handleSearchBar(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
-    const params = {
+
+    const data = event.currentTarget;
+    const formData = new FormData(data);
+
+    const params: QueryParams = {
       sort: sortValue,
       order: orderValue,
+      per_page: formData.get('per_page'),
+      q: formData.get('q'),
     };
-
-    const data = event.target;
-    const formData = new FormData(data);
-    formData.forEach((value, key) => (params[key] = value));
 
     onSearchSumbit(params);
   }

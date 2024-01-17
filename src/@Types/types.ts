@@ -12,8 +12,8 @@ export type Repository = {
 };
 
 export type QueryParams = {
-  q: string;
+  q: string | FormDataEntryValue | null;
   sort: string;
   order: string;
-  per_page: number;
+  per_page: number | FormDataEntryValue | null;
 };
