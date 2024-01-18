@@ -35,7 +35,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get('http://api.github.com/search/repositories', {
+      .get('https://api.github.com/search/repositories', {
         params: {
           ...searchParams,
           page: currentPage,
