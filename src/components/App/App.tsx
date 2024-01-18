@@ -5,7 +5,7 @@ import { useState, useEffect, SyntheticEvent } from 'react';
 
 // Package imports
 import axios from 'axios';
-import { Icon, Pagination, PaginationProps } from 'semantic-ui-react';
+import { Icon, Loader, Pagination, PaginationProps } from 'semantic-ui-react';
 
 // Types
 import { Repository, QueryParams } from '../../@Types/types';
@@ -20,6 +20,7 @@ import 'semantic-ui-css/semantic.min.css';
 import './App.scss';
 
 function App() {
+  const [loading, setLoading] = useState(false);
   const [repoData, setRepoData] = useState<Repository[]>([]);
   const [totalResult, setTotalResult] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<string | number | undefined>(
@@ -34,6 +35,8 @@ function App() {
   });
 
   useEffect(() => {
+    setLoading(true);
+
     axios
       .get('https://api.github.com/search/repositories', {
         params: {
@@ -52,6 +55,9 @@ function App() {
         } else {
           console.log('Error', error.message);
         }
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, [searchParams, currentPage]);
 
@@ -71,8 +77,15 @@ function App() {
         Browse Github repositories
       </h1>
       <SearchBar defaultValue={searchParams} onSearchSumbit={setSearchParams} />
-      <ResultMessage result={totalResult} />
-      <ReposResults repositories={repoData} />
+
+      {loading ? (
+        <Loader active inline="centered" />
+      ) : (
+        <div>
+          <ResultMessage result={totalResult} />
+          <ReposResults repositories={repoData} />
+        </div>
+      )}
 
       <div className="pagination">
         <Pagination
