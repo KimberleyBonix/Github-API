@@ -96,7 +96,7 @@ function SearchBar({ onSearchSumbit, defaultValue }: SearchBarProps) {
           type="number"
           defaultValue={defaultValue.per_page}
         />
-        <Button type="submit">Rechercher</Button>
+        <Button type="submit">Search</Button>
       </FormGroup>
     </Form>
   );

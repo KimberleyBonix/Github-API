@@ -9,7 +9,14 @@ function ResultMessage({ result }: MessageProps) {
   return (
     <Message>
       <p>
-        <b>{result}</b> results matched your search.
+        {result > 0 ? (
+          <>
+            <b>{result}</b> repositor{result > 1 ? 'ies' : 'y'} matched your
+            search.
+          </>
+        ) : (
+          'Nothing was found.'
+        )}
       </p>
     </Message>
   );
